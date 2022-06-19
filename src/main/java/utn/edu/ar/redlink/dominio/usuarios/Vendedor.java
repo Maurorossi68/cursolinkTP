@@ -3,7 +3,10 @@ package utn.edu.ar.redlink.dominio.usuarios;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
@@ -14,10 +17,10 @@ import utn.edu.ar.redlink.dominio.productos.Proveedor;
 public class Vendedor implements Usuario {
 	@NotBlank
 	private String nombre;
-	@Id
-	private int dni;
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	private int idVend;
 	private int telefono;
-	@OneToMany
+	@ManyToMany
 	private List<Proveedor> misProveedores;
 	@OneToMany
 	private List<Producto> prodAlaVenta;
@@ -34,7 +37,7 @@ public class Vendedor implements Usuario {
 	public Vendedor(String nombre, int dni, int telefono, List<Proveedor> misProveedores, List<Producto> prodAlaVenta) {
 		super();
 		this.nombre = nombre;
-		this.dni = dni;
+		this.idVend = dni;
 		this.telefono = telefono;
 		this.misProveedores = misProveedores;
 		this.prodAlaVenta = prodAlaVenta;
@@ -62,14 +65,6 @@ public class Vendedor implements Usuario {
 		this.nombre = nombre;
 	}
 
-	public int getDni() {
-		return dni;
-	}
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-
 	public int getTelefono() {
 		return telefono;
 	}
@@ -92,6 +87,14 @@ public class Vendedor implements Usuario {
 
 	public void setProdAlaVenta(List<Producto> prodAlaVenta) {
 		this.prodAlaVenta = prodAlaVenta;
+	}
+
+	public int getIdVend() {
+		return idVend;
+	}
+
+	public void setIdVend(int idVend) {
+		this.idVend = idVend;
 	}
 	
 	

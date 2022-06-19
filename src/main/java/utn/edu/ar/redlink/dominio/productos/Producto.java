@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -12,9 +13,10 @@ import utn.edu.ar.redlink.dominio.usuarios.Vendedor;
 
 //Siempre usar la Entity de javax
 @Entity
+@Table(name="producto")
 public class Producto {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)//Asigno el ID y lo hago autoincremental
-	private Integer idProd;
+	private Integer id_prod;
 	
 	@NotBlank
 	private String descripcion;
@@ -23,9 +25,10 @@ public class Producto {
 	
 	@Min(0)
 	private int stock;
-	@OneToOne
+	
+	@ManyToOne
 	private Proveedor miProveedor;
-	@OneToOne
+	@ManyToOne
 	private Vendedor miVendedor;
 	
 	public Producto() { //Es necesario para la base de datos
@@ -47,13 +50,7 @@ public class Producto {
 	  Getters y Setters
 	 -------------------------------------
 	*/
-	public int getCodProd() {
-		return idProd;
-	}
 
-	public void setCodProd(int codProd) {
-		this.idProd = codProd;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -93,6 +90,14 @@ public class Producto {
 
 	public void setMiVendedor(Vendedor miVendedor) {
 		this.miVendedor = miVendedor;
+	}
+
+	public Integer getId_prod() {
+		return id_prod;
+	}
+
+	public void setId_prod(Integer id_prod) {
+		this.id_prod = id_prod;
 	}
 	
 	

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utn.edu.ar.redlink.dominio.productos.Producto;
 import utn.edu.ar.redlink.repositorios.RepoProductoSpring;
-
+/*
 @RestController
 @RequestMapping("/productos")
 public class ProductosController {
@@ -51,3 +51,4 @@ public class ProductosController {
 		}
 	}
 }
+*/
