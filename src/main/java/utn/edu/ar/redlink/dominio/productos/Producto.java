@@ -1,9 +1,11 @@
 package utn.edu.ar.redlink.dominio.productos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -26,9 +28,10 @@ public class Producto {
 	@Min(0)
 	private int stock;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_prov")
 	private Proveedor miProveedor;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Vendedor miVendedor;
 	
 	public Producto() { //Es necesario para la base de datos

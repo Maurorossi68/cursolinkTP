@@ -1,54 +1,67 @@
 package utn.edu.ar.redlink.controladores;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.edu.ar.redlink.dominio.productos.Producto;
 import utn.edu.ar.redlink.repositorios.RepoProductoSpring;
 /*
 @RestController
-@RequestMapping("/productos")
 public class ProductosController {
 	
 	@Autowired
 	private RepoProductoSpring repo;
 	
-	@GetMapping("")
-	public List<Producto> listarProductos() {
-		return new ArrayList<Producto>(repo.findAll());
+	@GetMapping(path="/productos",params = {"page"})
+	public Page<Producto> findPaginated(@RequestParam(value="page", required=true) Integer page, 
+	  @RequestParam(value="size", required=false) Integer size,
+	  @RequestParam(value="sort", required=false) String sort) {
+		Pageable pageRequest;
+		if(size == null) { size=1;}
+		if(sort == null ) {
+			 pageRequest = PageRequest.of(page, size, Sort.unsorted());
+		}else{
+			 pageRequest = PageRequest.of(page, size, Sort.by(sort));
+		}
+		
+		return repo.findAll(pageRequest);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/productos")
+	public List<Producto> findAll(){
+		return repo.findAll();
+	}
+	
+	@GetMapping("/productos/{id}")
 	public Producto obtenerUnProducto(@PathVariable("id") int idProducto) {
 		return repo.findById(idProducto);
 	}
-	
-	@Transactional
-	@PostMapping("")
-	public String agregarProducto(@RequestBody @Valid Producto unProducto,			
+
+	@PostMapping("/productos")
+	public Producto agregarProducto(@RequestBody @Valid Producto unProducto,			
 			BindingResult bindingResult) {
-		if(!bindingResult.hasErrors()) {
-			repo.save(unProducto);
-			return "ok";
-		} else {
-			bindingResult.getFieldErrors().stream().forEach(x -> {
-				System.out.print(  x.getField());
-				x.getDefaultMessage();
-			});
-			return "no ok, con errores";
+		if(unProducto.getMiProveedor() != null) {
+			unProducto.getMiProveedor().addMisProductos(unProducto);
 		}
+		if(unProducto.getMiVendedor() != null) {
+			unProducto.getMiVendedor().addProdAlaVenta(unProducto);
+		}
+		repo.save(unProducto);
+		return  unProducto;
 	}
 }
 */

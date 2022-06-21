@@ -22,7 +22,7 @@ public class Vendedor implements Usuario {
 	private int telefono;
 	@ManyToMany
 	private List<Proveedor> misProveedores;
-	@OneToMany
+	@OneToMany(mappedBy="miVendedor")
 	private List<Producto> prodAlaVenta;
 	
 	public Vendedor() {
@@ -97,6 +97,8 @@ public class Vendedor implements Usuario {
 		this.idVend = idVend;
 	}
 	
-	
+	public void addProdAlaVenta(Producto unProducto) {
+		this.getProdAlaVenta().add(unProducto);
+	}
 	
 }

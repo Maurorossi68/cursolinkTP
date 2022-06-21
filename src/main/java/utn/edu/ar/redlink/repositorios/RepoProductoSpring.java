@@ -16,6 +16,4 @@ public interface RepoProductoSpring extends PagingAndSortingRepository<Producto,
 	
 	Producto findById(int id);
 	
-	
-	
 }

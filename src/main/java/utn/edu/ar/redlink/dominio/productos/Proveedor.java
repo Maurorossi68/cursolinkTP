@@ -1,8 +1,8 @@
 package utn.edu.ar.redlink.dominio.productos;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,8 +18,8 @@ public class Proveedor {
 	private int idProv;
 	@NotBlank
 	private String nombre;
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Producto> misProductos;
+	@OneToMany(mappedBy="miProveedor")
+	private List<Producto> misProductos = new ArrayList<Producto>();
 	
 	public Proveedor() {
 		super();
@@ -55,6 +55,10 @@ public class Proveedor {
 
 	public void setMisProductos(List<Producto> misProductos) {
 		this.misProductos = misProductos;
+	}
+	
+	public void addMisProductos(Producto unProducto) {
+		this.misProductos.add(unProducto);
 	}
 	
 	
