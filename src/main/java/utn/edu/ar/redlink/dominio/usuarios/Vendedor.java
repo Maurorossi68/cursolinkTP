@@ -24,7 +24,7 @@ public class Vendedor implements Usuario {
 	private List<Proveedor> misProveedores;
 	@OneToMany(mappedBy="miVendedor")
 	private List<Producto> prodAlaVenta;
-	
+	//asd
 	public Vendedor() {
 		super();
 	}
