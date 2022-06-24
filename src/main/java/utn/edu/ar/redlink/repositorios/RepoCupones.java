@@ -1,16 +1,15 @@
 package utn.edu.ar.redlink.repositorios;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import utn.edu.ar.redlink.dominio.usuarios.Vendedor;
-
+import utn.edu.ar.redlink.dominio.promociones.Cupon;
 @CrossOrigin
-@RepositoryRestResource
-public interface RepoVendedor extends PagingAndSortingRepository<Vendedor, Integer> {
+@RepositoryRestResource(path="cupones")
+public interface RepoCupones extends PagingAndSortingRepository<Cupon, Integer> {
 
-	Vendedor findByNombre(String nombre);
-	
-	Vendedor findById(int id);
+	Optional<Cupon> findById(Integer id);
 }

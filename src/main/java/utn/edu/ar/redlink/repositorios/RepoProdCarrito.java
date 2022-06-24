@@ -4,13 +4,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import utn.edu.ar.redlink.dominio.usuarios.Vendedor;
+import utn.edu.ar.redlink.dominio.productos.ProductoCarrito;
 
 @CrossOrigin
-@RepositoryRestResource
-public interface RepoVendedor extends PagingAndSortingRepository<Vendedor, Integer> {
+@RepositoryRestResource(path="carritos")
+public interface RepoProdCarrito extends PagingAndSortingRepository<ProductoCarrito, Integer> {
 
-	Vendedor findByNombre(String nombre);
-	
-	Vendedor findById(int id);
+	ProductoCarrito findByIdcarrito(int idcarrito);
 }

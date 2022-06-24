@@ -4,13 +4,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import utn.edu.ar.redlink.dominio.usuarios.Vendedor;
+import utn.edu.ar.redlink.dominio.promociones.Membresia;
 
 @CrossOrigin
-@RepositoryRestResource
-public interface RepoVendedor extends PagingAndSortingRepository<Vendedor, Integer> {
+@RepositoryRestResource(path="membresias")
+public interface RepoMembresias extends PagingAndSortingRepository<Membresia, Integer> {
 
-	Vendedor findByNombre(String nombre);
-	
-	Vendedor findById(int id);
+	Membresia findByIdMemb(int IdMemb);
 }

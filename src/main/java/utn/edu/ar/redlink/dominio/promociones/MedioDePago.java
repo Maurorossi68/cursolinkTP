@@ -13,6 +13,7 @@ public class MedioDePago implements Promocion {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMP;
 	@NotBlank
+	private String nombre;
 	private double descuento;
 	
 	@Override
@@ -24,7 +25,8 @@ public class MedioDePago implements Promocion {
 		super();
 	}
 	
-	public MedioDePago(double valorDescuento) {
+	public MedioDePago(String nombre,double valorDescuento) {
+		this.nombre=nombre;
 		this.descuento=valorDescuento;	
 	}
 	
@@ -39,6 +41,14 @@ public class MedioDePago implements Promocion {
 
 	public void setDescuento(double descuento) {
 		this.descuento = descuento;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 }

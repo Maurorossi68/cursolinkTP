@@ -18,12 +18,12 @@ import utn.edu.ar.redlink.dominio.usuarios.Vendedor;
 @Table(name="producto")
 public class Producto {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)//Asigno el ID y lo hago autoincremental
-	private Integer id_prod;
+	private Integer idprod;
 	
 	@NotBlank
 	private String descripcion;
 	
-	private float precio;
+	private double precio;
 	
 	@Min(0)
 	private int stock;
@@ -38,7 +38,7 @@ public class Producto {
 		super();
 	}
 	
-	public Producto(String descripcion, float precio, int stock, 
+	public Producto(String descripcion, double precio, int stock, 
 			Proveedor miProveedor,Vendedor miVendedor) {
 		super();
 		this.descripcion = descripcion;
@@ -63,11 +63,11 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
@@ -95,12 +95,12 @@ public class Producto {
 		this.miVendedor = miVendedor;
 	}
 
-	public Integer getId_prod() {
-		return id_prod;
+	public Integer getIdprod() {
+		return idprod;
 	}
 
-	public void setId_prod(Integer id_prod) {
-		this.id_prod = id_prod;
+	public void setIdprod(Integer idprod) {
+		this.idprod = idprod;
 	}
 	
 	

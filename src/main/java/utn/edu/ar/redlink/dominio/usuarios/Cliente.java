@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import utn.edu.ar.redlink.dominio.productos.Orden;
 import utn.edu.ar.redlink.dominio.productos.Producto;
@@ -25,10 +26,13 @@ public class Cliente implements Usuario {
 	private String nombre;
 	@Id
 	private int dni;
+	@JsonIgnore
+	private String contrasenia;
 	private int telefono;
-	@Transient
+	@OneToMany
 	private List<ProductoCarrito> carrito;
 	@OneToMany
+	@JsonIgnore
 	private List<Orden> ordenesHechas;
 	@OneToMany
 	private List<Cupon> misCupones;
@@ -53,6 +57,10 @@ public class Cliente implements Usuario {
 		if(this.getMiMembresia() != null) {
 			usarUnaPromo(this.getMiMembresia());
 		}
+		if(pago != null) {
+			usarUnaPromo(pago);
+		}
+		
 	}
 	
 	//Calculo un total a partir unicamente de los cupones activos que tengo
@@ -64,14 +72,16 @@ public class Cliente implements Usuario {
 		
 	public double obtenerCostoCarrito() {
 		double total = 0;
-		for(ProductoCarrito prod: carrito) {
+		for(ProductoCarrito prod: this.getCarrito()) {
 			total = total + prod.miCosto();
 		}
+		System.out.print(total);
 		return total;
 	}
 	
 	public void agregarACarrito(Producto algo, int cantidad) {
 		this.getCarrito().add(new ProductoCarrito(algo, cantidad));
+		System.out.println(this.getCarrito().get(0).miCosto());
 	}
 	
 	@Override
@@ -86,12 +96,16 @@ public class Cliente implements Usuario {
 	
 	public Cliente() {
 		super();
+		this.carrito = new ArrayList<ProductoCarrito>();
+		this.misCupones = new ArrayList<Cupon>();
+		this.ordenesHechas = new ArrayList<Orden>();
 	}
 	
-	public Cliente(int dni, String nombre, int telefono) {
+	public Cliente(int dni, String nombre, int telefono, String contrasenia) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.telefono = telefono;
+		this.contrasenia = contrasenia;
 		this.carrito = new ArrayList<ProductoCarrito>();
 		this.misCupones = new ArrayList<Cupon>();
 		this.ordenesHechas = new ArrayList<Orden>();
@@ -156,6 +170,14 @@ public class Cliente implements Usuario {
 
 	public void setMiMembresia(Membresia miMembresia) {
 		this.miMembresia = miMembresia;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 	
 }

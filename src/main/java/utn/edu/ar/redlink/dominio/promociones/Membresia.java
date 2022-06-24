@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 import utn.edu.ar.redlink.dominio.productos.Producto;
 
@@ -12,7 +11,6 @@ import utn.edu.ar.redlink.dominio.productos.Producto;
 public class Membresia implements Promocion{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMemb;
-	@NotBlank
 	private double descuento;
 	private int nivel;
 	

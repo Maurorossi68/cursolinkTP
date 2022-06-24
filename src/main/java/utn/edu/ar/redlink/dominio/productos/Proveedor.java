@@ -19,10 +19,11 @@ public class Proveedor {
 	@NotBlank
 	private String nombre;
 	@OneToMany(mappedBy="miProveedor")
-	private List<Producto> misProductos = new ArrayList<Producto>();
+	private List<Producto> misProductos;
 	
 	public Proveedor() {
 		super();
+		this.misProductos = new ArrayList<Producto>();
 	}
 	
 	public Proveedor(String nombre) {

@@ -1,7 +1,5 @@
 package utn.edu.ar.redlink.repositorios;
 
-import java.util.List;
-
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +10,8 @@ import utn.edu.ar.redlink.dominio.productos.Producto;
 @RepositoryRestResource(path="productos")
 public interface RepoProductoSpring extends PagingAndSortingRepository<Producto, Integer> {
 
-	List<Producto> findAll();
-
-	Producto findByDescripcion(String nombre);
+	Producto findByDescripcion(String descripcion);
 	
-	Producto findById(int id);
+	Producto findByIdprod(int idprod);
 	
 }

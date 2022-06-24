@@ -1,5 +1,6 @@
 package utn.edu.ar.redlink.dominio.productos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
 
 import utn.edu.ar.redlink.dominio.promociones.Cupon;
 import utn.edu.ar.redlink.dominio.promociones.MedioDePago;
@@ -22,7 +22,6 @@ public class Orden {
 	private int idOrden;
 	@Transient
 	private final List<ProductoCarrito> lista;
-	@NotBlank
 	private double precioTotal;
 	@OneToOne
 	private Cliente comprador;
@@ -38,6 +37,12 @@ public class Orden {
 	  Constructores
 	 -------------------------------------
 	*/	
+	
+	public Orden() {
+		super();
+		this.lista = new ArrayList<ProductoCarrito>();
+		this.cupones = new ArrayList<Cupon>();
+	}
 	
 	public Orden(List<ProductoCarrito> lista, Cliente comprador, double total, MedioDePago pagadoCon) {
 		super();
