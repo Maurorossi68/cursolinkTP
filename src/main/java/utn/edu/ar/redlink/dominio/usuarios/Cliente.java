@@ -48,7 +48,7 @@ public class Cliente implements Usuario {
 		this.getCarrito().clear();
 		return estaOrden;
 	}
-	
+	//Comentario para push a heroku
 	private void usarPromociones(MedioDePago pago) {
 		if(!this.getMisCupones().isEmpty()) {
 			for(Cupon unCupon : misCupones) {
