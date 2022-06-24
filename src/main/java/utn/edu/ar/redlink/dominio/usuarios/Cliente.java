@@ -45,6 +45,7 @@ public class Cliente implements Usuario {
 		//TODO: Agregar forma de pago
 		Orden estaOrden = new Orden(carrito, this, total, pago);
 		ordenesHechas.add(estaOrden);
+		this.getCarrito().clear();
 		return estaOrden;
 	}
 	
